@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="p-5 mb-4 bg-white rounded shadow-sm">
+    <h1 class="display-6">AgriStream IoT</h1>
+    <p class="lead">Soil sensor telemetry, drone imagery and irrigation control for large commercial farms.</p>
+    @if (User.Identity?.IsAuthenticated != true)
+    {
+        <a class="btn btn-success me-2" asp-controller="Account" asp-action="Login">Sign in</a>
+        <a class="btn btn-outline-success" asp-controller="Account" asp-action="Register">Register</a>
+    }
+    else
+    {
+        <a class="btn btn-success" asp-controller="Dashboard" asp-action="Index">Open field dashboard</a>
+    }
+</div>
+
+<div class="row g-3">
+    <div class="col-md-4"><div class="card h-100"><div class="card-body"><h2 class="h5">Live telemetry</h2><p class="mb-0">Latest soil moisture, temperature and pH readings per field.</p></div></div></div>
+    <div class="col-md-4"><div class="card h-100"><div class="card-body"><h2 class="h5">Drone images</h2><p class="mb-0">Upload aerial imagery and keep an audit trail of every file processed.</p></div></div></div>
+    <div class="col-md-4"><div class="card h-100"><div class="card-body"><h2 class="h5">Irrigation control</h2><p class="mb-0">Queue irrigation commands and follow device status in the registry.</p></div></div></div>
+</div>

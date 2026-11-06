@@ -1,0 +1,38 @@
+@model IReadOnlyList<DroneImage>
+@{
+    ViewData["Title"] = "Drone images";
+}
+
+<h1 class="h3 mb-3">Drone images</h1>
+
+<div class="card mb-4"><div class="card-body">
+    <form asp-action="Upload" method="post" enctype="multipart/form-data" class="row g-2 align-items-end">
+        <div class="col-md-6">
+            <label for="image" class="form-label">Upload an aerial image (JPEG or PNG, max 10 MB)</label>
+            <input id="image" name="image" type="file" accept="image/jpeg,image/png" class="form-control" required />
+        </div>
+        <div class="col-auto"><button type="submit" class="btn btn-success">Upload</button></div>
+    </form>
+</div></div>
+
+<div class="table-responsive">
+    <table class="table table-sm table-striped bg-white align-middle">
+        <thead><tr><th>Preview</th><th>File</th><th>Size (KB)</th><th>Uploaded by</th><th>Uploaded (UTC)</th></tr></thead>
+        <tbody>
+            @foreach (var image in Model)
+            {
+                <tr>
+                    <td><img class="drone-thumb" src="@Url.Action("Preview", new { name = image.Name })" alt="Drone image" /></td>
+                    <td>@image.Name</td>
+                    <td>@((image.SizeBytes / 1024.0).ToString("N1"))</td>
+                    <td>@image.UploadedBy</td>
+                    <td>@image.UploadedAt?.UtcDateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                </tr>
+            }
+            @if (Model.Count == 0)
+            {
+                <tr><td colspan="5" class="text-muted">No images uploaded yet.</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

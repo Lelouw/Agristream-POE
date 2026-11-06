@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+local.settings.json
+appsettings.Development.json
+*.log
+PublishProfiles/
+ServiceDependencies/
+serviceDependencies*.json
